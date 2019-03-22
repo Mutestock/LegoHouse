@@ -45,7 +45,8 @@ public abstract class Command {
             put("mainpage", new MainPageCommand());
             put("orderhistory", new OrderHistoryCommand());
             put("ordercreate", new OrderPageCommand());
-            put("ordercomplete", new OrderCompletePageCommand());         
+            put("ordercomplete", new OrderCompletePageCommand());   
+            put("orderdetails", new OrderHistoryCommand());
         }};
 
         return actions.getOrDefault(path, new UnknownCommand());

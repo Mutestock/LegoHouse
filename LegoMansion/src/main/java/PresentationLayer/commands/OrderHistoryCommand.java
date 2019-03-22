@@ -19,11 +19,11 @@ public class OrderHistoryCommand extends Command{
     
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        loadJSP(request, response);
     }
     
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/orderhistory.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/orderhistory.jsp").forward(request, response);
     }
     
 }

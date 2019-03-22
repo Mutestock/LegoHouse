@@ -37,6 +37,8 @@ public class LoginCommand extends Command {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
+        System.out.println(email);
+        
         try {
             if (email != null && password != null) {
                 User user = dmi.readUserByEmail(email);

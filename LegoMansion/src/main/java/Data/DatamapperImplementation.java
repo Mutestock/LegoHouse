@@ -165,9 +165,8 @@ public class DatamapperImplementation implements Data.Interfaces.Datamappers {
         return null;
     }
 
-    public User readUserByEmail(String email) throws DataException, SQLException
-    {
-          try {
+    public User readUserByEmail(String email) throws DataException, SQLException {
+        try {
             DBConnector connector = new DBConnector();
             Connection c = connector.getConnection();
             String query
@@ -478,4 +477,6 @@ public class DatamapperImplementation implements Data.Interfaces.Datamappers {
         }
         return null;
     }
+
+
 }

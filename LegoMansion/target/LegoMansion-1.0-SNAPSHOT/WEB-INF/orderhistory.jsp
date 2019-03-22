@@ -22,10 +22,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-        -->
-        <jsp:include page="siteheader.jsp" />
-        <jsp:include page="UserInfoBox.jsp" />
-        <--
         <form method="post">
             <table id ="uglytable" border = "1">
                 <tr>
@@ -40,6 +36,9 @@
                         DatamapperImplementation dmi = new DatamapperImplementation();
                         ArrayList<Order> orders = dmi.getAllOrders();
                         for (Order o : orders) {
+                            System.out.println("inside order history");
+                            System.out.println("inside order history");
+                            System.out.println("inside order history");
                 %>
                 <tr>
                     <td><%=o.getIdorders()%></td>
@@ -47,16 +46,16 @@
                     <td><%=o.getStatus()%></td>
                     <td><%=o.getUser()%></td>
 
-                <a href="/Cupcake/AdminPageOrderDetails.jsp?idorder=<%=o.getIdorders()%>" >
-                    <div style="height:100%;width:100%">
-                        <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
-                        view
-                    </div>
+                    <td><a href="/LegoMansion/orderDetails.jsp?idorder=<%=o.getIdorders()%>" >
+                            <div style="height:100%;width:100%">
+                                <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
+                                view
+                            </div>
                     </td>
-                    </tr>
-                    <%
-                        }
-                    %>
+                </tr>
+                <%
+                    }
+                %>
             </table>
             <%
                 } catch (Exception e) {
