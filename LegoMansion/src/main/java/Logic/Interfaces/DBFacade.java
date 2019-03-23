@@ -5,17 +5,10 @@
  */
 package Logic.Interfaces;
 
-import Logic.HelperClasses.UserHelpers.User;
-import java.util.ArrayList;
-
 /**
  *
  * @author Henning
  */
-public interface Facade {
-    
-    public void calculateAllBricksInHouse(int height, int length, int width);
-    
-    public String timeString();
+public class DBFacade {
     
 }

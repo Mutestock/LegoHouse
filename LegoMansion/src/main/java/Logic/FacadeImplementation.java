@@ -5,23 +5,29 @@
  */
 package Logic;
 
+import Logic.Buildingsplan.Building;
+import Logic.Buildingsplan.BuildingCalculator;
+import Logic.Buildingsplan.Layer;
 import Logic.Interfaces.Facade;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
  * @author Henning
  */
-public class FacadeImplementation implements Facade{
+public class FacadeImplementation implements Facade {
 
     @Override
-    public void calculator(int height, int length, int width) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Building calculateAllBricksInHouse(int height, int length, int width) {
+        BuildingCalculator bc = new BuildingCalculator();
+        Building building = bc.createBulding(height, width, length);
+        return building;
     }
 
     @Override
     public String timeString() {
         LocalDate localdate = LocalDate.now();
         return localdate.toString();
-    } 
+    }
 }
