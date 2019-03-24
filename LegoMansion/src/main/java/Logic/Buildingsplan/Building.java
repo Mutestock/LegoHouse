@@ -10,6 +10,16 @@ public class Building {
     private ArrayList<Layer> layers;
 
     public Building(int height, int width, int length, ArrayList<Layer> layers) {
+
+        if (height < 6 || width < 11 || length < 11) {
+            
+            System.out.println("Building is too small");
+            System.out.println("Height: " + height);
+            System.out.println("width : " + width);
+            System.out.println("length: " + length);
+            throw new Error();
+        }
+
         this.height = height;
         this.width = width;
         this.length = length;
@@ -37,5 +47,4 @@ public class Building {
         return "Building{" + "height=" + height + ", width=" + width + ", length=" + length + ", layers=" + layers + '}';
     }
 
-  
 }

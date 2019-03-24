@@ -28,7 +28,6 @@
                     <td>Idorders</td>
                     <td>Date</td>
                     <td>Status</td>
-                    <td>User</td>
                     <td>...</td>
                 </tr>
                 <%
@@ -39,18 +38,20 @@
                             System.out.println("inside order history");
                             System.out.println("inside order history");
                             System.out.println("inside order history");
+                            System.out.println(o.getDate());
+                            String dateconv = o.getDate();
                 %>
                 <tr>
                     <td><%=o.getIdorders()%></td>
-                    <td><%=o.getDate()%></td>
+                    <td><%=dateconv%></td>
                     <td><%=o.getStatus()%></td>
-                    <td><%=o.getUser()%></td>
 
-                    <td><a href="/LegoMansion/orderDetails.jsp?idorder=<%=o.getIdorders()%>" >
-                            <div style="height:100%;width:100%">
-                                <!--<input type="radio" name="radio1" onclick="handleClick(this.id);" id="customerId" />-->
-                                view
-                            </div>
+                   
+                    <td><a href="/LegoMansion/c/orderDetails"> view</a></p>
+                        <%session.setAttribute("idorderReference", o.getIdorders());%>
+                        <div style="height:100%;width:100%">
+
+                        </div>
                     </td>
                 </tr>
                 <%

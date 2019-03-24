@@ -8,6 +8,7 @@ import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Superclass of all web commands with a static method to return its own children.
@@ -46,9 +47,14 @@ public abstract class Command {
             put("orderhistory", new OrderHistoryCommand());
             put("ordercreate", new OrderPageCommand());
             put("ordercomplete", new OrderCompletePageCommand());   
-            put("orderdetails", new OrderHistoryCommand());
+            put("orderDetails", new OrderDetailsCommand());
+            put("adminPage", new AdminPageCommand());
+            
         }};
 
         return actions.getOrDefault(path, new UnknownCommand());
     }
+    
+    
+
 }

@@ -5,6 +5,8 @@
  */
 package PresentationLayer.commands;
 
+import Data.DatamapperImplementation;
+import Logic.HelperClasses.UserHelpers.User;
 import PresentationLayer.Command;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -29,7 +31,19 @@ public class MainPageCommand extends Command {
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         loadJSP(request, response);
+//        User user = (User) request.getSession().getAttribute("User");
+//
+//        String isadmin = user.isAdmin() ? "true" : "false";
+//        System.out.println(isadmin);
+//        System.out.println(user);
+//
+//        request.setAttribute("admin", isadmin);
+//        String isadminFetch = (String) request.getSession().getAttribute("admin");
+//        System.out.println(isadminFetch);
+//        System.out.println("");
+//        loadJSP(request, response);
     }
 
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -29,13 +29,17 @@
             out.println("<h1>Welcome back    : " + email + "</h1>");
         %>
         <%
-            if (admin == true) {
-                out.println("<p><a href=\"/Cupcake/AdminPage.jsp\"> Admin </a></p>");
-            }
+            
+//            if ((boolean)request.getAttribute("admin")==true) {
+//                out.println("<p><a href=\"/Cupcake/AdminPage.jsp\"> Admin </a></p>");
+//            }
         %>
+        
+        
         
         <p><a href="/LegoMansion/c/ordercreate"> Make an order</a></p>
         <p><a href="/LegoMansion/c/orderhistory"> Browse order history</a></p>
-        <p><a href="/Cupcake/SessionExit.jsp"> Logout</a></p>
+        <p><a href="/LegoMansion/c/adminPage"> Admin page</a></p>
+        <!--<p><a href="/Cupcake/SessionExit.jsp"> Logout</a></p>-->
     </body>
 </html>

@@ -21,6 +21,8 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginCommand extends Command {
 
+
+    
     /**
      * Basic login functionality, checks the username and password. Prints out
      * errormessages if either username or password is wrong.
@@ -34,6 +36,7 @@ public class LoginCommand extends Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final DatamapperImplementation dmi = new DatamapperImplementation();
 
+        
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 

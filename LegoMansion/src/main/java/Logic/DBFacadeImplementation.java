@@ -20,6 +20,7 @@ import java.util.ArrayList;
  */
 public class DBFacadeImplementation implements DBFacade {
 
+    // ********'USER*********
     @Override
     public void createUser(User user) throws DataException, SQLException {
         DatamapperImplementation dmi = new DatamapperImplementation();
@@ -59,6 +60,7 @@ public class DBFacadeImplementation implements DBFacade {
         return user;
     }
 
+    // ************ ORDER ************
     @Override
     public void createOrder(Order order) throws DataException, SQLException {
         DatamapperImplementation dmi = new DatamapperImplementation();
@@ -74,23 +76,24 @@ public class DBFacadeImplementation implements DBFacade {
 
     @Override
     public void updateOrder(Order order) throws DataException, SQLException {
-       DatamapperImplementation dmi = new DatamapperImplementation();
-       dmi.updateOrder(order);
+        DatamapperImplementation dmi = new DatamapperImplementation();
+        dmi.updateOrder(order);
     }
 
     @Override
     public void deleteOrder(Order order) throws DataException, SQLException {
-       DatamapperImplementation dmi = new DatamapperImplementation();
-       dmi.deleteOrder(order);
+        DatamapperImplementation dmi = new DatamapperImplementation();
+        dmi.deleteOrder(order);
     }
 
     @Override
     public ArrayList<Order> getAllOrders() throws DataException, SQLException {
-       DatamapperImplementation dmi = new DatamapperImplementation();
-       ArrayList<Order> orders = dmi.getAllOrders();
-       return orders;
+        DatamapperImplementation dmi = new DatamapperImplementation();
+        ArrayList<Order> orders = dmi.getAllOrders();
+        return orders;
     }
 
+    // ************** LEGO **************
     @Override
     public void createLego(Lego lego) throws DataException, SQLException {
         DatamapperImplementation dmi = new DatamapperImplementation();
@@ -118,10 +121,16 @@ public class DBFacadeImplementation implements DBFacade {
 
     @Override
     public ArrayList<Lego> getAllLego() throws DataException, SQLException {
-      DatamapperImplementation dmi = new DatamapperImplementation();
-      ArrayList<Lego> legoBricks = dmi.getAllLego();
-      return legoBricks;
-      
+        DatamapperImplementation dmi = new DatamapperImplementation();
+        ArrayList<Lego> legoBricks = dmi.getAllLego();
+        return legoBricks;
+    }
+
+    @Override
+    public Lego readLegoByOrderID(int id) throws DataException, SQLException {
+        DatamapperImplementation dmi = new DatamapperImplementation();
+        Lego lego = dmi.readLegoByOrderID(id);
+        return lego;
     }
 
 }

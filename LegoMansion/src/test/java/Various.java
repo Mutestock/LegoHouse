@@ -40,8 +40,9 @@ public class Various {
 
         assertEquals(expected, actual);
     }
+
     @Test
-    
+
     public void testReadUserIDByEmail() throws DataException, SQLException {
         int expected = 0;
         DatamapperImplementation dmi = new DatamapperImplementation();
@@ -201,13 +202,22 @@ public class Various {
         dmi.deleteLego(lego);
     }
 
-    @Test 
+    @Test
     public void testAllLego() throws DataException, SQLException {
         DatamapperImplementation dmi = new DatamapperImplementation();
         ArrayList<Lego> list = new ArrayList<>();
         list = dmi.getAllLego();
         Lego lego = list.get(0);
         int expected = 2;
+        int actual = lego.getHeight();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void readLegoByOrderID() throws DataException, SQLException {
+        int expected = 7;
+        DatamapperImplementation dmi = new DatamapperImplementation();
+        Lego lego = dmi.readLegoByOrderID(0);
         int actual = lego.getHeight();
         assertEquals(expected, actual);
     }

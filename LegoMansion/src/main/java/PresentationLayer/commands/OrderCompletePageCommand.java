@@ -19,11 +19,11 @@ public class OrderCompletePageCommand extends Command{
     
      @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+         loadJSP(request, response);
     }
     
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/ordercomplete.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/ordercomplete.jsp").forward(request, response);
     }
     
 }

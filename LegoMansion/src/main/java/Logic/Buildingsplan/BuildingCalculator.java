@@ -1,20 +1,27 @@
 package Logic.Buildingsplan;
 
+import Data.DatamapperImplementation;
+import Data.Exceptions.DataException;
+import Logic.HelperClasses.OrderHelper.Order;
+import Logic.HelperClasses.UserHelpers.User;
 import java.lang.Exception;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BuildingCalculator {
 
-    public static Building createBulding(int height, int width, int length) {
+    public Building createBulding(int height, int width, int length) {
         System.out.println("STARTED CREATEBUILDING.....");
 
 //        HashMap<Integer, Integer> capitalCities = new HashMap<Integer, Integer>();
 //        int[][][][][] arr = null;
 //        height, width, length represent input values from ordercreate.jsp
 //        Parameters are found with request.getParameter("height"); etc
-        sizeLimitationCheck(height, length, width);
+//        sizeLimitationCheck(height, length, width);
         ArrayList<Layer> layerList = new ArrayList<>();
         System.out.println("GONE THROUGH HEIGHT / LAYER WIDTH CONDITIONS");
         ArrayList<Layer> layers = new ArrayList<>();
@@ -27,8 +34,11 @@ public class BuildingCalculator {
             for (int i = 1; i < (height + 1); i++) {
 
                 System.out.println("NEW LAYER");
+
                 ArrayList<Side> sides = new ArrayList<>();
 
+//                 int frontBackLength = length - (layerNumber % 2 == 0 ? 0 : 4);
+//            int sideLength = width - (layerNumber % 2 == 1 ? 0 : 4); 
                 layers.add(new Layer(i, sides));
 
                 for (int j = 0; j < 4; j++) {
@@ -43,6 +53,8 @@ public class BuildingCalculator {
 
                     sideAccumulator = checkEnums(enumStrings, sideAccumulator, length, i, width);
 
+                    getSideNrByEnum(enumStrings);
+
                     System.out.println("CHECKED ENUM VALUES");
                     System.out.println(enumStrings);
                     System.out.println("ENTERED WITH: " + height + ", " + width + ", " + length);
@@ -51,22 +63,28 @@ public class BuildingCalculator {
                     int mediumBrickCount = 0;
                     int smallBrickCount = 0;
 
-                    storeMod = sideAccumulator % 4;
-                    temp = sideAccumulator / 2;
-                    sideAccumulator = (int) Math.floor(temp);
-                    largeBrickCount = sideAccumulator;
-                    sideAccumulator = storeMod;
+                    largeBrickCount = sideAccumulator / 4;
+                    int remaining = sideAccumulator % 4;
+                    mediumBrickCount = remaining / 2;
+                    remaining = remaining % 2;
+                    smallBrickCount = remaining;
 
-                    storeMod = sideAccumulator % 2;
-                    temp = sideAccumulator / 2;
-                    sideAccumulator = (int) Math.floor(temp);
-                    mediumBrickCount = sideAccumulator;
-                    sideAccumulator = storeMod;
-
-                    storeMod = sideAccumulator % 1;
-                    temp = sideAccumulator / 1;
-                    sideAccumulator = (int) Math.floor(temp);
-                    smallBrickCount = sideAccumulator;
+//                    storeMod = sideAccumulator % 4;
+//                    temp = sideAccumulator / 2;
+//                    sideAccumulator = (int) Math.floor(temp);
+//                    largeBrickCount = sideAccumulator;
+//                    sideAccumulator = storeMod;
+//
+//                    storeMod = sideAccumulator % 2;
+//                    temp = sideAccumulator / 2;
+//                    sideAccumulator = (int) Math.floor(temp);
+//                    mediumBrickCount = sideAccumulator;
+//                    sideAccumulator = storeMod;
+//
+//                    storeMod = sideAccumulator % 1;
+//                    temp = sideAccumulator / 1;
+//                    sideAccumulator = (int) Math.floor(temp);
+//                    smallBrickCount = sideAccumulator;
 
                     sides.add(new Side(largeBrickCount, mediumBrickCount, smallBrickCount));
 
@@ -90,158 +108,239 @@ public class BuildingCalculator {
             System.out.println("EXITED NESTED LOOPS");
         }
 //        System.out.println(Arrays.deepToString(arr));
-        System.out.println("\n" + "SUCCESS.......");
+
+        System.out.println(
+                "\n" + "SUCCESS.......");
 
         Building building = new Building(height, width, length, layers);
 
-        System.out.println("BUILDING CONTAINS: " + building);
-        System.out.println("LAYERS CONTAINS: " + building.getLayers());
-        System.out.println("SIDE CONTAINS: " + building.getLayers().get(5).getSides());
+        System.out.println(
+                "BUILDING CONTAINS: " + building);
+        System.out.println(
+                "LAYERS CONTAINS: " + building.getLayers());
+        System.out.println(
+                "SIDE CONTAINS: " + building.getLayers().get(5).getSides());
 
         return building;
     }
 
+    public static int getSideNrByEnum(String enumStrings) {
+        int acc = 0;
+        if (enumStrings.equals("FRONT")) {
+            acc = 0;
+        } else if (enumStrings.equals("BACK")) {
+            acc = 1;
+        } else if (enumStrings.equals("LEFT")) {
+            acc = 2;
+        } else if (enumStrings.equals("RIGHT")) {
+            acc = 3;
+        } else {
+            System.out.println("Struck error in getSideNrByEnum");
+        }
+        return acc;
+    }
+
     private static int checkEnums(String enumStrings, int sideAccumulator, int length, int i, int width) {
         if (enumStrings.equals("FRONT") || enumStrings.equals("BACK")) {
-            //sideAccumulator is now 11
             sideAccumulator = length;
-
+            if (i % 2 == 0) {
+                sideAccumulator = sideAccumulator - 4;
+            }
         } else if (enumStrings.equals("RIGHT") || enumStrings.equals("LEFT")) {
             if (i < 5) {
                 //represents door and window sides.sideAccumulator = length;
-                System.out.println("THIS IS A WINDOW/DOOR");
                 sideAccumulator = width - 4;
-                //sideAccumulator is now 13-4 = 9
             } else {
                 sideAccumulator = width;
+            }
+            if (i % 2 == 1) {
+                sideAccumulator = sideAccumulator - 4;
             }
         } else {
             System.out.println("SOMETHING WENT WRONG WITH ENUMS");
         }
+        
+        
+        System.out.println("||||||||||CHECKENUM ACCUM||||||||||||");
+        System.out.println(sideAccumulator);
+        System.out.println("||||||||||||||||||||||");
+        
         return sideAccumulator;
     }
 
-    private static void sizeLimitationCheck(int height, int length, int width) throws Error {
-        if (height < 5 || length < 5 || width < 5) {
-            System.out.println("Height / length / width below 5. This is a placeholder exception");
-            throw new Error();
+    public static int getBrickType4x2Total(Building building) {
+        ArrayList<Layer> layers = building.getLayers();
+        ArrayList<Side> sides = null;
+        int countUp = 0;
+        for (Layer y : layers) {
+            sides = y.getSides();
+            for (Side s : sides) {
+                countUp = countUp + s.getNumberOf4x2();
+            }
         }
+        return countUp;
+    }
+
+    public static int getBrickType2x2Total(Building building) {
+        ArrayList<Layer> layers = building.getLayers();
+        ArrayList<Side> sides = null;
+        int countUp = 0;
+
+        for (Layer y : layers) {
+            sides = y.getSides();
+            for (Side s : sides) {
+                countUp = countUp + s.getNumberOf2x2();
+            }
+        }
+        return countUp;
+    }
+
+    public static int getBrickType1x2Total(Building building) {
+        ArrayList<Layer> layers = building.getLayers();
+        ArrayList<Side> sides = null;
+        int countUp = 0;
+
+        for (Layer y : layers) {
+            sides = y.getSides();
+            for (Side s : sides) {
+                countUp = countUp + s.getNumberOf1x2();
+            }
+        }
+        return countUp;
+    }
+
+    public static int getBrickCount1x2BySide(Building building, int sideCount) {
+        ArrayList<Layer> layers = building.getLayers();
+        ArrayList<Side> sides = null;
+        int countUp = 0;
+        for (Layer y : layers) {
+            sides = y.getSides();
+            countUp = countUp + sides.get(sideCount).getNumberOf1x2();
+        }
+        return countUp;
+    }
+
+    public static int getBrickCount2x2BySide(Building building, int sideCount) {
+        ArrayList<Layer> layers = building.getLayers();
+        ArrayList<Side> sides = null;
+        int countUp = 0;
+        for (Layer y : layers) {
+            sides = y.getSides();
+            countUp = countUp + sides.get(sideCount).getNumberOf2x2();
+        }
+        return countUp;
+    }
+
+    public static int getBrickCount4x2BySide(Building building, int sideCount) {
+        ArrayList<Layer> layers = building.getLayers();
+        ArrayList<Side> sides = null;
+        int countUp = 0;
+        for (Layer y : layers) {
+            sides = y.getSides();
+            countUp = countUp + sides.get(sideCount).getNumberOf4x2();
+        }
+        return countUp;
+    }
+
+    public static int getBrickCount1x2BySideLine0(Building building, int sideCount) {
+        ArrayList<Layer> layers = building.getLayers();
+        Layer line0 = layers.get(0);
+        ArrayList<Side> sides = line0.getSides();
+        int countUp = sides.get(sideCount).getNumberOf1x2();
+        return countUp;
+    }
+
+    public static int getBrickCount2x2BySideLine0(Building building, int sideCount) {
+        ArrayList<Layer> layers = building.getLayers();
+        Layer line0 = layers.get(0);
+        ArrayList<Side> sides = line0.getSides();
+        int countUp = sides.get(sideCount).getNumberOf2x2();
+        return countUp;
+    }
+
+    public static int getBrickCount4x2BySideLine0(Building building, int sideCount) {
+        ArrayList<Layer> layers = building.getLayers();
+        Layer line0 = layers.get(0);
+        ArrayList<Side> sides = line0.getSides();
+        int countUp = sides.get(sideCount).getNumberOf4x2();
+        return countUp;
     }
 
     public static void main(String[] args) {
 
         Building building = null;
-        building = createBulding(12, 9, 7);
+//        building = createBulding(7, 13, 21);
         System.out.println(building);
-    }
-}
+        
+        System.out.println("Seriously though --------------------------------------");
+       
+        ArrayList<Layer> layers =  building.getLayers();
+        for(Layer y : layers)
+        {
+            System.out.println( y.getSides());
+           
+        }
+        
 
-/*
-        Building(15,13,11)
-        {
-        
-            building height, width, length are read from orderinput.
-            written like so:
-                request.getParameter("height"); ..etc
-        
-            if(height<5 || length<5 || width<5)
-                {
-                    belowMinSizeError;
-                }
-            else {
-        }
-        Layer(Building)
-            Enum currentSide{front,back, left, right}
-        {
-         for (int i = 0; i < Building.getHeight; i++) {
-            for (int j = 0; j < 4; j++ {
-                Side();
-                currentSide -> one spot right;
+        System.out.println("###################");
+        System.out.println("1x2 total: " + getBrickType1x2Total(building));
+        System.out.println("2x2 total: " + getBrickType2x2Total(building));
+        System.out.println("4x2 total: " + getBrickType4x2Total(building));
+        System.out.println("###################");
+
+        int right = getSideNrByEnum("RIGHT");
+        int front = getSideNrByEnum("FRONT");
+        int back = getSideNrByEnum("BACK");
+        int left = getSideNrByEnum("LEFT");
+
+        System.out.println("****1x2****");
+        System.out.println("RIGHT SIDE: " + getBrickCount1x2BySide(building, right));
+        System.out.println("FRONT SIDE: " + getBrickCount1x2BySide(building, front));
+        System.out.println("BACK SIDE: " + getBrickCount1x2BySide(building, back));
+        System.out.println("LEFT SIDE: " + getBrickCount1x2BySide(building, left));
+
+        System.out.println("******2x2******");
+        System.out.println("RIGHT SIDE: " + getBrickCount2x2BySide(building, right));
+        System.out.println("FRONT SIDE: " + getBrickCount2x2BySide(building, front));
+        System.out.println("BACK SIDE: " + getBrickCount2x2BySide(building, back));
+        System.out.println("LEFT SIDE: " + getBrickCount2x2BySide(building, left));
+
+        System.out.println("******4x2");
+        System.out.println("Second RIGHT: " + getBrickCount4x2BySide(building, right));
+        System.out.println("Second FRONT: " + getBrickCount4x2BySide(building, front));
+        System.out.println("Second BACK : " + getBrickCount4x2BySide(building, back));
+        System.out.println("Second LEFT : " + getBrickCount4x2BySide(building, left));
+
+        System.out.println("1x2 line 0: " + getBrickCount1x2BySideLine0(building, front));
+        System.out.println("2x2 line 0: " + getBrickCount2x2BySideLine0(building, left));
+        System.out.println("4x2 line 0: " + getBrickCount4x2BySideLine0(building, left));
+
+        DatamapperImplementation dmi = new DatamapperImplementation();
+        try {
+            ArrayList<Order> orders = dmi.getAllOrders();
+            for (Order o : orders)
+            {
+                String date = o.getDate();
+                System.out.println(date);
             }
+            
+            
+        ArrayList<Order> orderList = dmi.getAllOrders();
+        Order order = orderList.get(0);
+            System.out.println(order.getDate());
+            
+            System.out.println(orderList);
+
+            
+            
+            
+        } catch (DataException ex) {
+            Logger.getLogger(BuildingCalculator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BuildingCalculator.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        }
-        Side(Layer, Enum)
-        {
-            int sideAccumulator = 0;
-                if(Layer.currentSide == front || Layer.currentSide == back)
-                    {
-                        sideAccumulator = Building.getLength()-4;  (11-4 = 7);
-                    }
-                else if(Layer.currentSide == left || Layer.currentSide == right
-                    {
-                        sideAccumulator = Building.getWidth;  (
-                    }
         
-                     
-            int temp = 0;
-            int storeMod = 0;
-     int largeBrick = 0;
-     int mediumBrick = 0;
-     int smallBrick = 0;
-    
-    
-            for (int i = 0; i < sideAccumulator; i++) {
-                 storeMod = sideAccumulator % 4; (storemod is 3)
-                 sideAccumulator / 2 = temp;
-                 sideAccumulator = math.rounddown(temp);
-                    (sideAccumulator is now 2);
-                 Add LengthAccumulator to 4x2 brick (adding 2 bricks)
-                 largeBrick = sideAccumulator;
-                 sideAccumulator = storeMod;
-                 
-                 storeMod = sideAccumulator % 2 (storemod is 1)
-                 LengthAccumulator / 2 = temp;
-                 sideAccumulator = math.rounddown(temp);
-                    (sideAccumulator is now 1);
-                 Add LengthAccumulator to 2x2 brick (adding 1 brick)
-                 mediumBrick = sideAccumulator;
-                 sideAccumulator = storeMod;
-                 
-                 
-                 storeMod = sideAccumulator % 1 (storemod is 0)
-                 sideAccumulator / 1 = temp;
-                 sideAccumulator = math.rounddown(temp);
-                    (sideAccumulator is now 1);
-                 Add LengthAccumulator to 1x2 brick (adding 1 brick)
-                 smallBrick = sideAccumulator;
-    
-                 Complete sideFront = (2,1,1) => send to table side 1
-        
-    
-                
-    
-                    
-                 Math
-        
-                 (if storeMod != 0)
-                     {
-                        throw error;
-                     }
-                     }
-                 put enum amounts to table.
-        
-                Brick(side)
-                {
-                    
-                    Enum {4x2, 2x2 1x2}
-                    
-                    
-                        
-        
-                 }
-        
-         for (int i = 0; i < getBuilding.length; i++) {
-         Side(Layer)  
-        
-        }
-        Brick(Side)
-        
-        
-        
-        
-        
-        
-        
-        
- */
+    }
+
+}

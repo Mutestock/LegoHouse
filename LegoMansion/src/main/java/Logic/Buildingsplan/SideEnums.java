@@ -13,11 +13,6 @@ public class SideEnums {
 
     public enum sidesEnum {
         FRONT, BACK, RIGHT, LEFT;
-//        private String side;
-//
-//        private sidesEnum(String side) {
-//            this.side = side;
-//        }
     }
 
 }

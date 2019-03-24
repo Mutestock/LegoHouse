@@ -11,6 +11,7 @@ import Logic.FacadeImplementation;
 import Logic.HelperClasses.LegoHelper.Lego;
 import Logic.HelperClasses.OrderHelper.Order;
 import Logic.HelperClasses.UserHelpers.User;
+import Logic.Interfaces.DBFacade;
 import java.sql.BatchUpdateException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +30,7 @@ import static jdk.nashorn.internal.runtime.Context.DEBUG;
  *
  * @author Henning
  */
-public class DatamapperImplementation implements Data.Interfaces.Datamappers {
+public class DatamapperImplementation implements DBFacade {
 
     @Override
     public void createUser(User user) throws DataException, SQLException {
@@ -319,7 +320,7 @@ public class DatamapperImplementation implements Data.Interfaces.Datamappers {
                 String order_date = rs.getString("order_date");
                 String status = rs.getString("status");
                 int userIDFK = rs.getInt("userIDFK");
-                allOrders.add(new Order(idorders, status, status, readUser(userIDFK)));
+                allOrders.add(new Order(idorders, order_date, status, readUser(userIDFK)));
             }
             prepStmt.close();
             rs.close();
@@ -478,5 +479,41 @@ public class DatamapperImplementation implements Data.Interfaces.Datamappers {
         return null;
     }
 
+    @Override
+    public Lego readLegoByOrderID(int id) throws DataException, SQLException {
+        try {
+            DBConnector connector = new DBConnector();
+            Connection c = connector.getConnection();
+            String query
+                    = "SELECT * "
+                    + "FROM lego_type "
+                    + "WHERE idordersfk = '" + id + "';";
+            PreparedStatement prepStmt = c.prepareStatement(query);
+            ResultSet rs = prepStmt.executeQuery(query);
+            c = connector.getConnection();
+            
+            int idlego_type = 0;
+            int height = 0;
+            int width = 0;
+            int length = 0;
+
+            while (rs.next()) {
+                
+                idlego_type = rs.getInt("idlego_type");
+                height = rs.getInt("height");
+                width = rs.getInt("width");
+                length = rs.getInt("length");
+            }
+
+            Lego lego = new Lego(idlego_type, height, width, length, readOrder(id));
+            prepStmt.close();
+            rs.close();
+            c.close();
+
+            return lego;
+        } catch (Exception ex) {
+            throw new DataException();
+        }
+    }
 
 }

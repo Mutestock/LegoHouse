@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class FacadeImplementation implements Facade {
 
     @Override
-    public Building calculateAllBricksInHouse(int height, int length, int width) {
+    public Building calculateAllBricksInHouse(int height, int width, int length) {
         BuildingCalculator bc = new BuildingCalculator();
         Building building = bc.createBulding(height, width, length);
         return building;

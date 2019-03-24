@@ -5,6 +5,7 @@
  */
 package Logic.Interfaces;
 
+import Logic.Buildingsplan.Building;
 import Logic.HelperClasses.UserHelpers.User;
 import java.util.ArrayList;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  */
 public interface Facade {
     
-    public void calculateAllBricksInHouse(int height, int length, int width);
+    public Building calculateAllBricksInHouse(int height, int width, int length);
     
     public String timeString();
     
