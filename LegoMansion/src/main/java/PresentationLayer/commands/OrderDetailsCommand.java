@@ -29,16 +29,13 @@ public class OrderDetailsCommand extends Command{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
      
+      //This is the uglist class in the entire world. I am so sorry
+        
         int idorder = (int)request.getSession().getAttribute("idorderReference");
         DBFacadeImplementation DBfi = new DBFacadeImplementation();
         Order order = null;
         Building building = null;
         
-        System.out.println("##############################");
-        System.out.println("##############################");
-        System.out.println("IDORDER IS: "+ idorder);
-        System.out.println("##############################");
-        System.out.println("##############################");
         
         try {
             order = DBfi.readOrder(idorder);
