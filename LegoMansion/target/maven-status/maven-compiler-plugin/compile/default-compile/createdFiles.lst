@@ -8,6 +8,7 @@ PresentationLayer\FrontController.class
 Data\DBAccess\DBConnector.class
 Logic\FacadeImplementation.class
 Logic\Interfaces\Facade.class
+PresentationLayer\commands\ChangeStatusCommand.class
 Logic\Interfaces\DBFacade.class
 Data\DatamapperImplementation.class
 Logic\Buildingsplan\Brick.class

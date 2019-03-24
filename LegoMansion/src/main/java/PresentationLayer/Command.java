@@ -49,6 +49,7 @@ public abstract class Command {
             put("ordercomplete", new OrderCompletePageCommand());   
             put("orderDetails", new OrderDetailsCommand());
             put("adminPage", new AdminPageCommand());
+            put("changestatus", new ChangeStatusCommand());
             
         }};
 
