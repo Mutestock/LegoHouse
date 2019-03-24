@@ -93,52 +93,6 @@
                 </tr>
 
 
-
-                <!--                    
-                                   
-                               request.getSession().setAttribute("frontline01x2", frontline01x2);
-                               request.getSession().setAttribute("backline01x2", backline01x2);
-                               request.getSession().setAttribute("rightline01x2", rightline01x2);
-                               request.getSession().setAttribute("leftline01x2", leftline01x2);
-                               
-                               request.getSession().setAttribute("frontline02x2", frontline02x2);
-                               request.getSession().setAttribute("backline02x2", backline02x2);
-                               request.getSession().setAttribute("rightline02x2", rightline02x2);
-                               request.getSession().setAttribute("leftline02x2", leftline02x2);
-                               
-                               request.getSession().setAttribute("frontline04x2", frontline04x2);
-                               request.getSession().setAttribute("backline04x2", backline04x2);
-                               request.getSession().setAttribute("rightline04x2", rightline04x2);
-                               request.getSession().setAttribute("leftline04x2", leftline04x2);
-                               
-                               // **********
-                               
-                               request.getSession().setAttribute("frontSide1x2", frontSide1x2);
-                               request.getSession().setAttribute("backSide1x2", backSide1x2);
-                               request.getSession().setAttribute("rightSide1x2", rightSide1x2);
-                               request.getSession().setAttribute("leftSide1x2", leftSide1x2);
-                               
-                               request.getSession().setAttribute("frontSide2x2", frontSide2x2);
-                               request.getSession().setAttribute("backSide2x2", backSide2x2);
-                               request.getSession().setAttribute("rightSide2x2", rightSide2x2);
-                               request.getSession().setAttribute("leftSide2x2", leftSide2x2);
-                               
-                               request.getSession().setAttribute("frontSide4x2", frontSide4x2);
-                               request.getSession().setAttribute("backSide4x2", backSide4x2);
-                               request.getSession().setAttribute("rightSide4x2", rightSide4x2);
-                               request.getSession().setAttribute("leftSide4x2", leftSide4x2);
-                                                         
-                               //************
-                               
-                               request.getSession().setAttribute("total1x2", total1x2);
-                               request.getSession().setAttribute("total2x2", total2x2);
-                               request.getSession().setAttribute("total4x2", total4x2);
-                -->
-
-
-
-
-
             </table>
         </form>
     </body>
