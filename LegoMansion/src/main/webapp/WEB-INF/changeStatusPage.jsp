@@ -12,11 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        
-        <input type="submit" value="CANCELLED" onclick="<% request.getSession().setAttribute("statuschange", "cancelled"); %>">
-        <input type="submit" value="SHIPPED" onclick="<% request.getSession().setAttribute("statuschange", "shipped"); %>">
-        <input type="submit" value="ORDER_RECIEVED" onclick="<% request.getSession().setAttribute("statuschange", "received"); %>">
-        <input type="submit" value="DELIVERED" onclick="<% request.getSession().setAttribute("statuschange", "delivered"); %>">     
-        
+        <form action="changestatus">
+            <input type="submit" name="cancelbutton" value="CANCELLED">
+            <input type="submit" name="shippedbutton" value="SHIPPED">
+            <input type="submit" name="recievedbutton"value="ORDER_RECIEVED">
+            <input type="submit" name="deliveredbutton"value="DELIVERED">     
+        </form>
+        <p><a href="/LegoMansion/c/adminPage"> go back</a></p>
     </body>
 </html>

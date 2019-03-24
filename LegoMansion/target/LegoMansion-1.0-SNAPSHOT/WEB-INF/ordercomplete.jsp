@@ -139,5 +139,6 @@
 
             </table>
         </form>
+        <p><a href="/LegoMansion/c/mainpage"> back to main page</a></p>
     </body>
 </html>

@@ -42,7 +42,7 @@
                     <td><%out.print(testStatus);%> </td>
                     <td><%out.print(testEmail);%> </td>
                     <td><a href="/LegoMansion/c/changestatus"> view</a></p>
-                        <%session.setAttribute("tablenr", i);%>
+                        <%session.setAttribute("tablenr", i-1);%>
                         <div style="height:100%;width:100%">
 
                         </div>
