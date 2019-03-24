@@ -9,6 +9,21 @@ package Data.Exceptions;
  *
  * @author Henning
  */
-public class EmptySessionException {
+public class EmptySessionException extends Exception{
+    
+     public EmptySessionException() {
+    }
+
+    public EmptySessionException(String string) {
+        super(string);
+    }
+
+    public EmptySessionException(String string, Throwable thrwbl) {
+        super(string, thrwbl);
+    }
+
+    public EmptySessionException(Throwable thrwbl) {
+        super(thrwbl);
+    }
     
 }
