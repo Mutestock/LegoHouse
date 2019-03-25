@@ -8,7 +8,7 @@ Due to the recent confusion about the deadline of this project, I've made an edi
 
 This version is designated as: legohouseDeadline25th
 
-If the deadline was, in fact, NOT the 25th and instead the 24th, then please use the standard folder, which was last updated on the 24th deadline. Look at the commit log if in doubt.
+If the deadline was, in fact, NOT the 25th and instead the 24th, then please use the standard folder, which was last updated on the 24th deadline. Look at the commit log if in doubt. Target location of old folder changed due to moving of project group in netbeans. This was in order to avoid confusion between old and new project.
 
 
 Changes made in the 25th edition are:
