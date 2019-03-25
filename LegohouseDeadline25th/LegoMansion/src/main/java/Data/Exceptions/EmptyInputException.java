@@ -10,10 +10,7 @@ package Data.Exceptions;
  * @author Henning
  */
 public class EmptyInputException extends Exception{
-    
-    
-     public EmptyInputException() {
-    }
+
 
     public EmptyInputException(String string) {
         super(string);

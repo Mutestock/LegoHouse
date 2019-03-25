@@ -30,7 +30,6 @@ public class OrderDetailsCommand extends Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("############ENTERED ORDERDETAILSCOMMAND##########");
         //This is the uglist class in the entire world. I am so sorry
         DBFacadeImplementation dbfi = new DBFacadeImplementation();
         ArrayList<Order> orders = new ArrayList<>();
@@ -45,23 +44,11 @@ public class OrderDetailsCommand extends Command {
         }
         
           idorder = Integer.parseInt(request.getParameter("orderID"));
-          System.out.println("POST PARSE idorder: " + idorder);
-        
-//        System.out.println("Entering for loop");
-//        for (int i = 0; i < orders.size(); i++) {
-//            System.out.println("Attempting to get idorder");
-//            String iToString = Integer.toString(i+1);
-//            System.out.println(iToString);
-//            idorder = (int) request.getSession().getAttribute("idorderReference"+iToString);
-//            System.out.println(idorder);
-//        }
-
+      
         DBFacadeImplementation DBfi = new DBFacadeImplementation();
-        Order order = null;
         Building building = null;
 
         try {
-            order = DBfi.readOrder(idorder);
             Lego lego = DBfi.readLegoByOrderID(idorder);
             int height = lego.getHeight();
             int width = lego.getWidth();

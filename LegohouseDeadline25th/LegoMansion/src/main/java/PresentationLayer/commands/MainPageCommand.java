@@ -31,9 +31,8 @@ public class MainPageCommand extends Command {
      */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        loadJSP(request, response);
-//     
+      
+        loadJSP(request, response);    
     }
 
     private void loadJSP(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

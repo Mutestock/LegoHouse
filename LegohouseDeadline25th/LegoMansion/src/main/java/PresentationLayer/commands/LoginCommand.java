@@ -3,7 +3,6 @@
 package PresentationLayer.commands;
 
 import Data.DatamapperImplementation;
-import Data.Exceptions.ValidationCollection;
 import Logic.HelperClasses.UserHelpers.User;
 import PresentationLayer.Command;
 import java.io.IOException;
@@ -22,6 +21,8 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginCommand extends Command {
 
+
+    
     /**
      * Basic login functionality, checks the username and password. Prints out
      * errormessages if either username or password is wrong.
@@ -34,21 +35,13 @@ public class LoginCommand extends Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final DatamapperImplementation dmi = new DatamapperImplementation();
-        request.getSession().setAttribute("errormessage", "");
 
+        
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
-        try {
-            ValidationCollection vc = new ValidationCollection();
-            vc.validateEmptyInput(email);
-            vc.validateEmptyInput(password);
-        } catch (Exception e) {
-            request.getSession().setAttribute("errormessage", "Empty input in login");
-        }
-
+        
         System.out.println(email);
-
+        
         try {
             if (email != null && password != null) {
                 User user = dmi.readUserByEmail(email);

@@ -9,6 +9,7 @@ import Data.DatamapperImplementation;
 import Data.Exceptions.DataException;
 import Logic.DBFacadeImplementation;
 import Logic.HelperClasses.OrderHelper.Order;
+import Logic.HelperClasses.UserHelpers.User;
 import PresentationLayer.Command;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,6 +28,7 @@ public class ChangeStatusCommand extends Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+      
         try {
             //        <input type="submit" value="CANCELLED" onclick="<%= request.getSession().setAttribute("CANCELLED", "cancelled") %>">
 //        <input type="submit" value="SHIPPED" onclick="<%= request.getSession().setAttribute("SHIPPED", "shipped") %>">
@@ -52,7 +54,7 @@ public class ChangeStatusCommand extends Command {
                 order = updateOrder;
                 dbfi.updateOrder(order);
                 System.out.println("Shipped");
-            } else if (request.getParameter("recievedbutton") != null) {
+                } else if (request.getParameter("recievedbutton") != null) {
                 Order updateOrder = new Order(orderid, order.getDate(), "ORDER_RECIEVED", order.getUser());
                 order = updateOrder;
                 dbfi.updateOrder(order);

@@ -6,6 +6,7 @@
 package PresentationLayer.commands;
 
 import Data.DatamapperImplementation;
+import Data.Exceptions.ValidationCollection;
 import Logic.HelperClasses.UserHelpers.User;
 import PresentationLayer.Command;
 import java.io.IOException;
@@ -22,9 +23,20 @@ public class RegistrationPageCommand extends Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final DatamapperImplementation dmi = new DatamapperImplementation();
+        request.getSession().setAttribute("errormessage", "");
         int useridcheck = 0;
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+
+        try {
+            ValidationCollection vc = new ValidationCollection();
+            vc.validateEmptyInput(email);
+            vc.validateEmptyInput(password);
+        } catch (Exception e) {
+            request.getSession().setAttribute("errormessage", "Empty input in login");
+            loadJSP(request, response);
+        }
+
         try {
             if (email != null && password != null) {
                 User user = dmi.readUserByEmail(email);
@@ -36,9 +48,11 @@ public class RegistrationPageCommand extends Command {
                     request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 } else {
                     request.getRequestDispatcher("/FailedCreation.jsp").forward(request, response);
+                    loadJSP(request, response);
                 }
             } else {
                 request.getRequestDispatcher("/WEB-INF/registration.jsp").forward(request, response);
+                loadJSP(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();

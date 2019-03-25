@@ -34,11 +34,12 @@
             </div>
         </form>
         <%
-            String errormessage = (String) request.getAttribute("errormessage");
+            String errormessage = (String) request.getSession().getAttribute("errormessage");
             if (errormessage == null || errormessage.isEmpty()) {
                 errormessage = "";
             }
             out.println(errormessage);
+
         %>
     </body>
 </html>

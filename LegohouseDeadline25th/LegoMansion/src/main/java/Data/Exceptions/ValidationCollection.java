@@ -10,22 +10,25 @@ package Data.Exceptions;
  * @author Henning
  */
 public class ValidationCollection {
-    
-    public void validateSizes(int height, int width, int length) throws UnderMinimumValuesException
-    {
-        if (height < 6 || width < 11 || length < 11)
-        {
+
+    public void validateSizes(int height, int width, int length) throws UnderMinimumValuesException {
+        if (height < 6 || width < 11 || length < 11) {
             throw new UnderMinimumValuesException("Height/width/length was below minimum somewhere");
         }
     }
-    
-     public void validateEmptyInput(String input) throws EmptyInputException
-    {
-        if (input.isEmpty() || input == null)
-        {
+
+    public void validateEmptyInput(String input) throws EmptyInputException {
+        if (input.isEmpty() || input == null) {
             throw new EmptyInputException("Input field was empty or null");
         }
     }
-    
-    
+
+    public void validateEmptySession(String id) throws EmptySessionException {
+        if (id == null) {
+            System.out.println("empty");
+            throw new EmptySessionException("Session was empty");
+
+        }
+    }
+
 }
