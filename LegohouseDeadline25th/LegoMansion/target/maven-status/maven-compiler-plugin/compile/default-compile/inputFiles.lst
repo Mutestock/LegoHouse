@@ -29,4 +29,6 @@ C:\Users\Henning\Desktop\DAT\LegoHouse\LegohouseDeadline25th\LegoMansion\src\mai
 C:\Users\Henning\Desktop\DAT\LegoHouse\LegohouseDeadline25th\LegoMansion\src\main\java\PresentationLayer\commands\OrderPageCommand.java
 C:\Users\Henning\Desktop\DAT\LegoHouse\LegohouseDeadline25th\LegoMansion\src\main\java\Logic\FacadeImplementation.java
 C:\Users\Henning\Desktop\DAT\LegoHouse\LegohouseDeadline25th\LegoMansion\src\main\java\Data\Exceptions\EmptySessionException.java
+C:\Users\Henning\Desktop\DAT\LegoHouse\LegohouseDeadline25th\LegoMansion\src\main\java\Data\Exceptions\UnderMinimumValuesException.java
 C:\Users\Henning\Desktop\DAT\LegoHouse\LegohouseDeadline25th\LegoMansion\src\main\java\Data\Exceptions\InvalidOutputException.java
+C:\Users\Henning\Desktop\DAT\LegoHouse\LegohouseDeadline25th\LegoMansion\src\main\java\Data\Exceptions\ValidationCollection.java

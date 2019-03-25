@@ -11,4 +11,21 @@ package Data.Exceptions;
  */
 public class EmptyInputException extends Exception{
     
+    
+     public EmptyInputException() {
+    }
+
+    public EmptyInputException(String string) {
+        super(string);
+    }
+
+    public EmptyInputException(String string, Throwable thrwbl) {
+        super(string, thrwbl);
+    }
+
+    public EmptyInputException(Throwable thrwbl) {
+        super(thrwbl);
+    }
+    
+    
 }

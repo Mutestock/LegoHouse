@@ -24,13 +24,8 @@
         <%
             User user = (User) request.getSession().getAttribute("User");
             String email = user.getEmail();
-            Boolean admin = user.isAdmin();
 
             out.println("<h1>Welcome back    : " + email + "</h1>");
-        %>
-        <%
-            
-//            
         %>
         
         

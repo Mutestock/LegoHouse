@@ -2,6 +2,8 @@ package Logic.Buildingsplan;
 
 import Data.DatamapperImplementation;
 import Data.Exceptions.DataException;
+import Data.Exceptions.UnderMinimumValuesException;
+import Data.Exceptions.ValidationCollection;
 import Logic.HelperClasses.OrderHelper.Order;
 import Logic.HelperClasses.UserHelpers.User;
 import java.lang.Exception;
@@ -17,9 +19,9 @@ public class BuildingCalculator {
     public Building createBulding(int height, int width, int length) {
         System.out.println("STARTED CREATEBUILDING.....");
 
-        ArrayList<Layer> layerList = new ArrayList<>();
         System.out.println("GONE THROUGH HEIGHT / LAYER WIDTH CONDITIONS");
         ArrayList<Layer> layers = new ArrayList<>();
+     
         {
 
             for (int i = 1; i < (height + 1); i++) {

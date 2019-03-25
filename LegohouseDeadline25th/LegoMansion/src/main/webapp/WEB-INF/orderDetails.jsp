@@ -32,6 +32,7 @@
                     <td><%out.print(session.getAttribute("height"));
                         if ((int) session.getAttribute("height") < 6) {
                         %> Value below minimum. Error<%
+                            System.out.println("height below minimum");
                                throw new InvalidOutputException();
                            }
                         %></td>
@@ -39,6 +40,7 @@
 
                         if ((int) session.getAttribute("width") < 11) {
                         %> Value below minimum. Error<%
+                            System.out.println("width below minimum");
                                 throw new InvalidOutputException();
                             }
                         %></td>
@@ -46,6 +48,7 @@
                     <td><%out.print(session.getAttribute("length"));
                         if ((int) session.getAttribute("length") < 11) {
                         %> Value below minimum. Error<%
+                            System.out.println("length below minimum");
                                 throw new InvalidOutputException();
                             }
                         %></td>

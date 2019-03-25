@@ -10,5 +10,7 @@ package Data.Exceptions;
  * @author Henning
  */
 public class InvalidSymbolsException {
+ 
+    
     
 }

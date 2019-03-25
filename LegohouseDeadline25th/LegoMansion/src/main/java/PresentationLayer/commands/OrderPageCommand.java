@@ -6,6 +6,7 @@
 package PresentationLayer.commands;
 
 import Data.DatamapperImplementation;
+import Data.Exceptions.ValidationCollection;
 import Logic.Buildingsplan.Building;
 import Logic.Buildingsplan.BuildingCalculator;
 import Logic.FacadeImplementation;
@@ -29,11 +30,19 @@ public class OrderPageCommand extends Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final DatamapperImplementation dmi = new DatamapperImplementation();
-//
-
+        request.getSession().setAttribute("errormessage", "");
+        ValidationCollection vc = new ValidationCollection();
         String heightString = request.getParameter("height");
         String widthString = request.getParameter("width");
         String lengthString = request.getParameter("length");
+
+        try {
+            vc.validateEmptyInput(heightString);
+            vc.validateEmptyInput(widthString);
+            vc.validateEmptyInput(lengthString);
+        } catch (Exception e) {
+            request.getSession().setAttribute("errormessage", "Empty input");
+        }
 
         int idLegoCheck = 0;
         int idOrderCheck = 0;
@@ -42,6 +51,12 @@ public class OrderPageCommand extends Command {
             int height = Integer.parseInt(heightString);
             int width = Integer.parseInt(widthString);
             int length = Integer.parseInt(lengthString);
+            try {
+                vc.validateSizes(height, width, length);
+            } catch (Exception e) {
+                request.getSession().setAttribute("errormessage", "Illegal characters");
+                loadJSP(request, response);
+            }
 
             if (height > 0 && width > 0 && length > 0) {
 
@@ -117,9 +132,8 @@ public class OrderPageCommand extends Command {
                 int total1x2 = BuildingCalculator.getBrickType1x2Total(building);
                 int total2x2 = BuildingCalculator.getBrickType2x2Total(building);
                 int total4x2 = BuildingCalculator.getBrickType4x2Total(building);
-                
-                // ********************
 
+                // ********************
                 request.getSession().setAttribute("frontline01x2", frontline01x2);
                 request.getSession().setAttribute("backline01x2", backline01x2);
                 request.getSession().setAttribute("rightline01x2", rightline01x2);
@@ -186,6 +200,7 @@ public class OrderPageCommand extends Command {
             loadJSP(request, response);
         } catch (Exception e) {
             System.out.println("Caught.............!");
+
             loadJSP(request, response);
         }
 //        

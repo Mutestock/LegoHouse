@@ -1,12 +1,12 @@
 package Data.Exceptions;
 
 /**
- *Custom exception. 
- *Used for the convenience of the programmers in this specific project.
+ * Custom exception. Used for the convenience of the programmers in this
+ * specific project.
+ *
  * @author Henning
  */
 public class DataException extends Exception {
-
 
     public DataException() {
     }

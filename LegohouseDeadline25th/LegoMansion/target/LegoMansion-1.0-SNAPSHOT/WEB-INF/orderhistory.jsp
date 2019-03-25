@@ -37,30 +37,16 @@
                         DatamapperImplementation dmi = new DatamapperImplementation();
                         ArrayList<Order> ordersPreUser = dmi.getAllOrders();
                         User user = (User) session.getAttribute("User");
-
-                        ArrayList<Order> orders = new ArrayList<Order>();
-                        int userId = user.getID();
-                        System.out.println("userid: " + userId);
-//                        System.out.println("FOUND USER ID IN ORDERHISTORY: " + userIDEmail);
-//                        System.out.println("ORDERS PRE: " + ordersPreUser);
-
+                        ArrayList<Order> orders = new ArrayList<>();
                         for (Order o : ordersPreUser) {
-                            o.getUser().getID();
                             if (o.getUser().getID() == user.getID()) {
-                                System.out.println("ack");
                                 orders.add(o);
                             }
                         }
-                        System.out.println("ORDERS POST: " + orders);
-                        session.setAttribute("orderTableSize", orders.size());
-
                         for (Order o : orders) {
-                            System.out.println(o.getDate());
                             String dateconv = o.getDate();
-                            i++;
-                            String iToString = Integer.toString(i);
                 %>
-                <tr>
+                <tr>        
                     <td><%=o.getIdorders()%></td>
                     <td><%=dateconv%></td>
                     <td><%=o.getStatus()%></td>
@@ -77,11 +63,20 @@
                 <%                    }
                 %>
             </table>
-            <%
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            %>
+
         </form>
+        <%
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        %>
+        <%
+            String errormessage = (String) request.getAttribute("errormessage");
+            if (errormessage == null || errormessage.isEmpty()) {
+                errormessage = "";
+            }
+            out.println(errormessage);
+            out.println("cake");
+        %>
     </body>
 </html>

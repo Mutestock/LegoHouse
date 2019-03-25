@@ -1,5 +1,7 @@
 package Logic.Buildingsplan;
 
+import Data.Exceptions.UnderMinimumValuesException;
+import Data.Exceptions.ValidationCollection;
 import java.util.ArrayList;
 
 public class Building {
@@ -11,15 +13,16 @@ public class Building {
 
     public Building(int height, int width, int length, ArrayList<Layer> layers) {
 
-        if (height < 6 || width < 11 || length < 11) {
-
-            throw new Error();
+        try {
+            ValidationCollection vc = new ValidationCollection();
+            vc.validateSizes(height, width, length);
+            this.height = height;
+            this.width = width;
+            this.length = length;
+            this.layers = layers;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        this.height = height;
-        this.width = width;
-        this.length = length;
-        this.layers = layers;
     }
 
     public int getHeight() {

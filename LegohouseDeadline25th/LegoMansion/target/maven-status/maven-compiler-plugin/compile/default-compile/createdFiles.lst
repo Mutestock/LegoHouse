@@ -6,6 +6,7 @@ Logic\DBFacadeImplementation.class
 Data\Exceptions\EmptyInputException.class
 Logic\Buildingsplan\BuildingCalculator.class
 Data\Exceptions\InvalidOutputException.class
+Data\Exceptions\ValidationCollection.class
 PresentationLayer\FrontController.class
 Data\DBAccess\DBConnector.class
 Logic\FacadeImplementation.class
@@ -18,6 +19,7 @@ Logic\Buildingsplan\SideEnums.class
 Logic\HelperClasses\UserHelpers\User.class
 PresentationLayer\commands\OrderHistoryCommand.class
 PresentationLayer\Command$1.class
+Data\Exceptions\UnderMinimumValuesException.class
 Logic\HelperClasses\OrderHelper\Order.class
 Logic\Buildingsplan\Building.class
 Logic\Buildingsplan\SideEnums$sidesEnum.class
