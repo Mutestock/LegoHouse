@@ -22,7 +22,9 @@ Changes made in the 25th edition are:
 * Update JUnit tests to use current database values
 * A few other nitpicky things.
 
-Also note, that the connection to the server database has been slow. Upon transferring the database data from localhost to said database, the now deprecated JUnit tests completion time increased from under 1 second to over 23. It's noticeable especially when creating an order on the site, since the site attempts to find an empty spot for an order id with an ArrayList, which does not use any sortation method. One could invest more time into the project optimization, but it's been unprioritized due to the deadline.
+Also note, that the connection to the server database has been slow. Upon transferring the database data from localhost to said database, the now deprecated JUnit tests completion time increased from under 1 second to over 23. It's noticeable especially when creating an order on the site, since the site attempts to find an empty spot for an order id with an ArrayList, which does not use any sortation method. One could invest more time into optimization, but it's been unprioritized due to the deadline.
+
+Frontend graphics has been unprioritized as well. 
 
 
 
