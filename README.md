@@ -4,6 +4,8 @@ This is a solution to a mandatory educational project.
 
 IMPORTANT:
 
+Build before running
+
 Due to the recent confusion about the deadline of this project, I've made an edition of it which assumes that the deadline is 25/05/19 23:55 instead of 24/05/19 23:55.
 
 This version is designated as: legohouseDeadline25th
